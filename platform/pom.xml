@@ -20,7 +20,7 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.caoke</groupId>
+            <groupId>com.bat</groupId>
             <artifactId>common</artifactId>
             <version>${project.version}</version>
         </dependency>
