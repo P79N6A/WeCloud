@@ -11,7 +11,7 @@
 
     <artifactId>work</artifactId>
     <packaging>war</packaging>
-    <name>platform Maven Webapp</name>
+    <name>work Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
