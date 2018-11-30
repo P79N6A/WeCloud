@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>platform</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>platform Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
@@ -26,4 +26,23 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <!--&lt;!&ndash; 如果不添加此节点mybatis的mapper.xml文件都会被漏掉 可以让Maven build字节码时把资源文件也一起生成.&ndash;&gt;
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>-->
+    </build>
 </project>
