@@ -10,4 +10,8 @@ import lombok.ToString;
 public class MiaoShaUser {
     private Long id;
     private String name;
+    private String password;
+    private String salt;
+    private String registerDate;
+    private String lastLoginDate;
 }

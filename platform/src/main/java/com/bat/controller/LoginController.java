@@ -1,6 +1,7 @@
 package com.bat.controller;
 
 import com.bat.domain.MiaoShaUser;
+import com.bat.result.Result;
 import com.bat.service.MiaoShaUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,9 @@ public class LoginController {
     private MiaoShaUserService miaoShaUserService;
 
 	@RequestMapping("/sayHello")
-	public String login(Model model){
+	@ResponseBody
+	public Result<MiaoShaUser> login(Model model){
         MiaoShaUser user = miaoShaUserService.findById(1L);
-	    model.addAttribute("name",user.getName());
-		return "hello";
+		return Result.success(user);
 	}
 }
