@@ -1,16 +1,22 @@
 package com.bat.controller;
 
 import com.bat.domain.MiaoShaUser;
+import com.bat.result.CodeMsg;
 import com.bat.result.Result;
 import com.bat.service.MiaoShaUserService;
+import com.bat.utils.MD5Util;
+import com.bat.utils.UUIDUtil;
+import com.bat.vo.LoginVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @program: WeCloud
@@ -19,16 +25,29 @@ import org.springframework.web.servlet.ModelAndView;
  * @create: 2018-11-23 18:53
  **/
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
     private MiaoShaUserService miaoShaUserService;
 
-	@RequestMapping("/sayHello")
+	@RequestMapping("/login")
 	@ResponseBody
-	public Result<MiaoShaUser> login(Model model){
-        MiaoShaUser user = miaoShaUserService.findById(1L);
-		return Result.success(user);
+	public Result<String> login(HttpServletRequest request, HttpServletResponse response,LoginVo loginVo){
+		if(loginVo == null || StringUtils.isBlank(loginVo.getName()) || StringUtils.isBlank(loginVo.getPassword())){
+			return Result.error(CodeMsg.SERVER_ERROR);
+		}
+		MiaoShaUser user = miaoShaUserService.findByName(loginVo.getName());
+		if(user == null){
+			return Result.error(CodeMsg.USERNAME_NOT_FOUND);
+		}
+		String passFornt = MD5Util.md5(loginVo.getPassword()+ user.getSalt());
+		if(!user.getPassword().equals(passFornt)){
+			return Result.error(CodeMsg.PASSWORD_IS_WRONG);
+		}
+		if(loginVo.getAcceptCookie()){
+			Cookie cookie = new Cookie("sessionCookie", UUIDUtil.getUuid());
+			response.addCookie(cookie);
+		}
+		return Result.success("登录成功");
 	}
 }

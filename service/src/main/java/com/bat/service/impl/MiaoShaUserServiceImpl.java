@@ -14,6 +14,12 @@ public class MiaoShaUserServiceImpl implements MiaoShaUserService {
 
     @Override
     public MiaoShaUser findById(Long id){
+
         return miaoShaUserDao.findById(id);
+    }
+
+    @Override
+    public MiaoShaUser findByName(String name){
+        return miaoShaUserDao.findByName(name);
     }
 }

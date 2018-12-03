@@ -11,4 +11,6 @@ public interface MiaoShaUserDao {
     @Select("select * from miao_sha_user where id = #{id}")
     MiaoShaUser findById(@Param("id")Long id);
 
+    @Select("select * from miao_sha_user where name = #{name}")
+	MiaoShaUser findByName(@Param("name")String name);
 }
