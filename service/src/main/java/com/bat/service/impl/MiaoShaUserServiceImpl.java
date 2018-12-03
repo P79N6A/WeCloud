@@ -6,11 +6,14 @@ import com.bat.service.MiaoShaUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service
 public class MiaoShaUserServiceImpl implements MiaoShaUserService {
 
-    @Autowired
-    private MiaoShaUserDao miaoShaUserDao;
+//    @Autowired
+    @Resource(name = "miaoShaUserDao")
+    public MiaoShaUserDao miaoShaUserDao;
 
     @Override
     public MiaoShaUser findById(Long id){
