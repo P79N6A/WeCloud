@@ -40,7 +40,6 @@ public class LoginController {
 			return Result.error(CodeMsg.SERVER_ERROR);
 		}
 		MiaoShaUser user = miaoShaUserService.findByName(loginVo.getName());
-		MiaoShaUser user2 = miaoShaUserService.findById(10L);
 		WebUserLogin webUserLogin = webUserLoginService.findById(10L);
 		if(user == null){
 			return Result.error(CodeMsg.USERNAME_NOT_FOUND);

@@ -2,6 +2,7 @@ package com.bat.domain.cas;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @program: WeCloud
@@ -11,9 +12,10 @@ import lombok.Setter;
  **/
 @Setter
 @Getter
+@ToString
 public class WebUserLogin {
 	private Integer id;
-	private String user_name;
+	private String userName;
 	private String userPassword;
 	private String userSource;
 	private String userStatus;

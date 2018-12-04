@@ -6,13 +6,10 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
@@ -28,7 +25,6 @@ import javax.sql.DataSource;
 public class WeDataSourceConfig {
 
 	@Bean
-	@Primary
 	@ConfigurationProperties(prefix = "spring.we.datasource")
 	public DataSource weDataSource(){
 		DruidDataSource druidDataSource = new DruidDataSource();
@@ -39,6 +35,9 @@ public class WeDataSourceConfig {
 	public SqlSessionFactory weSqlSessionFactory(@Qualifier("weDataSource")DataSource dataSource)throws Exception{
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
+		org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+		configuration.setMapUnderscoreToCamelCase(true);
+		bean.setConfiguration(configuration);
 //		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath://resources/mapper/we/*.xml"));
 //		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:com/bat//we/*.xml"));
 		return bean.getObject();

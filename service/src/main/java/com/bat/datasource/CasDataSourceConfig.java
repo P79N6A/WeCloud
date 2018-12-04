@@ -34,8 +34,11 @@ public class CasDataSourceConfig {
 	public SqlSessionFactory casSqlSessionFactory(@Qualifier("casDataSource")DataSource dataSource)throws Exception{
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
+		org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+		configuration.setMapUnderscoreToCamelCase(true);
+		bean.setConfiguration(configuration);
 //		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath://resources/mapper/cas/*.xml"));
-//		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:com/bat//cas/*.xml"));
+//		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:com/bat/cas/*.xml"));
 		return bean.getObject();
 	}
 
