@@ -50,4 +50,10 @@ public class LoginController {
 		}
 		return Result.success("登录成功");
 	}
+
+	@RequestMapping("/test")
+	@ResponseBody
+	public String test(HttpServletRequest request, HttpServletResponse response,LoginVo loginVo){
+		return "登录成功";
+	}
 }
