@@ -1,7 +1,7 @@
 package com.bat.service.impl;
 
-import com.bat.dao.MiaoShaUserDao;
-import com.bat.domain.MiaoShaUser;
+import com.bat.dao.we.MiaoShaUserDao;
+import com.bat.domain.we.MiaoShaUser;
 import com.bat.service.MiaoShaUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

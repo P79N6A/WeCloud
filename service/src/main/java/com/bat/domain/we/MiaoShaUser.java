@@ -1,4 +1,4 @@
-package com.bat.domain;
+package com.bat.domain.we;
 
 import lombok.Getter;
 import lombok.Setter;

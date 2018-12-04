@@ -1,16 +1,17 @@
 package com.bat.controller;
 
-import com.bat.domain.MiaoShaUser;
+import com.bat.domain.cas.WebUserLogin;
+import com.bat.domain.we.MiaoShaUser;
 import com.bat.result.CodeMsg;
 import com.bat.result.Result;
 import com.bat.service.MiaoShaUserService;
+import com.bat.service.WebUserLoginService;
 import com.bat.utils.MD5Util;
 import com.bat.utils.UUIDUtil;
 import com.bat.vo.LoginVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,6 +30,8 @@ public class LoginController {
 
     @Autowired
     private MiaoShaUserService miaoShaUserService;
+    @Autowired
+	private WebUserLoginService webUserLoginService;
 
 	@RequestMapping("/login")
 	@ResponseBody
@@ -37,6 +40,8 @@ public class LoginController {
 			return Result.error(CodeMsg.SERVER_ERROR);
 		}
 		MiaoShaUser user = miaoShaUserService.findByName(loginVo.getName());
+		MiaoShaUser user2 = miaoShaUserService.findById(10L);
+		WebUserLogin webUserLogin = webUserLoginService.findById(10L);
 		if(user == null){
 			return Result.error(CodeMsg.USERNAME_NOT_FOUND);
 		}
@@ -46,6 +51,8 @@ public class LoginController {
 		}
 		if(loginVo.getAcceptCookie()){
 			Cookie cookie = new Cookie("sessionCookie", UUIDUtil.getUuid());
+			cookie.setPath("/");
+			cookie.setMaxAge(24*60*60);
 			response.addCookie(cookie);
 		}
 		return Result.success("登录成功");

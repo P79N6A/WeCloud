@@ -1,6 +1,6 @@
 package com.bat.service;
 
-import com.bat.domain.MiaoShaUser;
+import com.bat.domain.we.MiaoShaUser;
 
 public interface MiaoShaUserService {
     MiaoShaUser findById(Long id);

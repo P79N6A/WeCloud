@@ -1,10 +1,9 @@
-package com.bat.dao;
+package com.bat.dao.we;
 
-import com.bat.domain.MiaoShaUser;
+import com.bat.domain.we.MiaoShaUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
 
 @Mapper
 public interface MiaoShaUserDao {
