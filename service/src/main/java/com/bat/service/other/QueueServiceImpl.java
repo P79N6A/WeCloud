@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
- * 服务启动的时候，就任务加载进去
+ * 服务启动的时候，就把任务加载进去
  * 用ApplicationRunner不会阻塞主线程的加载
  * 实现 InitializingBean 接口 或 用PostConstruct注解都会阻塞主线程的运行
  * 可新建一个线程来完成任务的加载
@@ -21,11 +21,12 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @author: ke.Cao
  * @create: 2018-12-07 11:31
  **/
-@Service
+//@Service
 public class QueueServiceImpl implements ApplicationRunner {
 
 	@Autowired
 	private ArrayBlockingQueue<Long> abQueue;
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception{
 		System.out.println("---------------------start-------------------");

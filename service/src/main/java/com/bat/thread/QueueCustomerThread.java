@@ -12,13 +12,18 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @create: 2018-12-07 16:15
  **/
 public class QueueCustomerThread extends Thread {
-	@Autowired
+
 	private ArrayBlockingQueue<Long> abQueue;
+
+	public QueueCustomerThread(ArrayBlockingQueue<Long> abQueue){
+		this.abQueue = abQueue;
+	}
+
 	@Override
 	public void run() {
 		try {
 			while (true) {
-				while (QueueUtil.abQueue.size() > 0) {
+				while (abQueue.size() > 0) {
 //					Long time = QueueUtil.abQueue.take();
 					Long time = abQueue.take();
 					System.out.println(time);
