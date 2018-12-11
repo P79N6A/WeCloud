@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
  * @author: ke.Cao
  * @create: 2018-12-07 16:19
  **/
-@Service
+//@Service
 public class Queue3ServiceImpl {
 	@PostConstruct
 	public void dowork(){

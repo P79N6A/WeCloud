@@ -1,4 +1,4 @@
-package com.bat.datasource;
+package com.bat.config.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,35 +20,35 @@ import javax.sql.DataSource;
  * @create: 2018-12-04 15:17
  **/
 @Configuration
-@MapperScan(basePackages = "com.bat.dao.cas",sqlSessionTemplateRef = "casSqlSessionTemplate")
-public class CasDataSourceConfig {
+@MapperScan(basePackages = "com.bat.dao.we",sqlSessionTemplateRef = "weSqlSessionTemplate")
+public class WeDataSourceConfig {
 
 	@Bean
-	@ConfigurationProperties(prefix = "spring.cas.datasource")
-	public DataSource casDataSource(){
+	@ConfigurationProperties(prefix = "spring.we.datasource")
+	public DataSource weDataSource(){
 		DruidDataSource druidDataSource = new DruidDataSource();
 		return druidDataSource;
 	}
 
 	@Bean
-	public SqlSessionFactory casSqlSessionFactory(@Qualifier("casDataSource")DataSource dataSource)throws Exception{
+	public SqlSessionFactory weSqlSessionFactory(@Qualifier("weDataSource")DataSource dataSource)throws Exception{
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
 		org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
 		configuration.setMapUnderscoreToCamelCase(true);
 		bean.setConfiguration(configuration);
-//		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath://resources/mapper/cas/*.xml"));
-//		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:com/bat/cas/*.xml"));
+//		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath://resources/mapper/we/*.xml"));
+//		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:com/bat//we/*.xml"));
 		return bean.getObject();
 	}
 
 	@Bean
-	public DataSourceTransactionManager casDataSourceTransactionManager(@Qualifier("casDataSource")DataSource dataSource){
+	public DataSourceTransactionManager weDataSourceTransactionManager(@Qualifier("weDataSource")DataSource dataSource){
 		return new DataSourceTransactionManager(dataSource);
 	}
 
 	@Bean
-	public SqlSessionTemplate casSqlSessionTemplate(@Qualifier("casSqlSessionFactory")SqlSessionFactory sqlSessionFactory){
+	public SqlSessionTemplate weSqlSessionTemplate(@Qualifier("weSqlSessionFactory")SqlSessionFactory sqlSessionFactory){
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
 

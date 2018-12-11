@@ -1,4 +1,4 @@
-package com.bat.datasource;
+package com.bat.config.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
@@ -21,35 +20,35 @@ import javax.sql.DataSource;
  * @create: 2018-12-04 15:17
  **/
 @Configuration
-@MapperScan(basePackages = "com.bat.dao.we",sqlSessionTemplateRef = "weSqlSessionTemplate")
-public class WeDataSourceConfig {
+@MapperScan(basePackages = "com.bat.dao.cas",sqlSessionTemplateRef = "casSqlSessionTemplate")
+public class CasDataSourceConfig {
 
 	@Bean
-	@ConfigurationProperties(prefix = "spring.we.datasource")
-	public DataSource weDataSource(){
+	@ConfigurationProperties(prefix = "spring.cas.datasource")
+	public DataSource casDataSource(){
 		DruidDataSource druidDataSource = new DruidDataSource();
 		return druidDataSource;
 	}
 
 	@Bean
-	public SqlSessionFactory weSqlSessionFactory(@Qualifier("weDataSource")DataSource dataSource)throws Exception{
+	public SqlSessionFactory casSqlSessionFactory(@Qualifier("casDataSource")DataSource dataSource)throws Exception{
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
 		org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
 		configuration.setMapUnderscoreToCamelCase(true);
 		bean.setConfiguration(configuration);
-//		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath://resources/mapper/we/*.xml"));
-//		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:com/bat//we/*.xml"));
+//		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath://resources/mapper/cas/*.xml"));
+//		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:com/bat/cas/*.xml"));
 		return bean.getObject();
 	}
 
 	@Bean
-	public DataSourceTransactionManager weDataSourceTransactionManager(@Qualifier("weDataSource")DataSource dataSource){
+	public DataSourceTransactionManager casDataSourceTransactionManager(@Qualifier("casDataSource")DataSource dataSource){
 		return new DataSourceTransactionManager(dataSource);
 	}
 
 	@Bean
-	public SqlSessionTemplate weSqlSessionTemplate(@Qualifier("weSqlSessionFactory")SqlSessionFactory sqlSessionFactory){
+	public SqlSessionTemplate casSqlSessionTemplate(@Qualifier("casSqlSessionFactory")SqlSessionFactory sqlSessionFactory){
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
 

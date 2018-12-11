@@ -34,6 +34,8 @@ public class LoginController {
     private MiaoShaUserService miaoShaUserService;
     @Autowired
 	private WebUserLoginService webUserLoginService;
+    @Autowired
+	private ArrayBlockingQueue<Long> abQueue;
 
 	@RequestMapping("/login")
 	@ResponseBody
@@ -68,8 +70,8 @@ public class LoginController {
 	@RequestMapping("/testQ")
 	@ResponseBody
 	public String testQ(HttpServletRequest request, HttpServletResponse response,LoginVo loginVo)throws Exception{
-		ArrayBlockingQueue arrayBlockingQueue =  QueueUtil.abQueue;
-		arrayBlockingQueue.put(System.currentTimeMillis());
+//		ArrayBlockingQueue arrayBlockingQueue =  QueueUtil.abQueue;
+		abQueue.put(System.currentTimeMillis());
 		return "登录成功";
 	}
 }

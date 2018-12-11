@@ -2,11 +2,13 @@ package com.bat.service.other;
 
 import com.bat.queue.QueueUtil;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * 服务启动的时候，就任务加载进去
@@ -19,15 +21,22 @@ import javax.annotation.PostConstruct;
  * @author: ke.Cao
  * @create: 2018-12-07 11:31
  **/
-//@Service
+@Service
 public class QueueServiceImpl implements ApplicationRunner {
 
+	@Autowired
+	private ArrayBlockingQueue<Long> abQueue;
 	@Override
 	public void run(ApplicationArguments args) throws Exception{
 		System.out.println("---------------------start-------------------");
 		while (true){
-			while(QueueUtil.abQueue.size()>0){
-				Long time = QueueUtil.abQueue.take();
+//			while(QueueUtil.abQueue.size()>0){
+//				Long time = QueueUtil.abQueue.take();
+//				System.out.println(time);
+//				Thread.sleep(1000);
+//			}
+			while(abQueue.size()>0){
+				Long time = abQueue.take();
 				System.out.println(time);
 				Thread.sleep(1000);
 			}
