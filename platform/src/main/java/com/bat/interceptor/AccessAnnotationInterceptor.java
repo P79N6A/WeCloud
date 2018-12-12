@@ -1,6 +1,8 @@
 package com.bat.interceptor;
 
 import com.bat.annotation.AccessCtrl;
+import com.bat.domain.we.MiaoShaUser;
+import com.bat.util.UserUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -20,6 +22,9 @@ public class AccessAnnotationInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		System.out.println("-----------AccessAnnotationInterceptor preHandle-------------");
+		MiaoShaUser shaUser = new MiaoShaUser();
+		shaUser.setId(1L);
+		UserUtil.setUser(shaUser);
 		if(handler instanceof HandlerMethod){
 			AccessCtrl ctrl = ((HandlerMethod) handler).getMethodAnnotation(AccessCtrl.class);
 			if(ctrl == null) {

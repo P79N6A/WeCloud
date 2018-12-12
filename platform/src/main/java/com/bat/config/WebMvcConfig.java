@@ -32,8 +32,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(accessAnnotationInterceptor).addPathPatterns("/").addPathPatterns(new ArrayList<String>(){{add("/");}}).order(1);
-		registry.addInterceptor(accessInterceptor).excludePathPatterns("/xxx").excludePathPatterns(new ArrayList<String>(){{add("/xxx");}}).order(2);
+		registry.addInterceptor(accessAnnotationInterceptor);
+		registry.addInterceptor(accessInterceptor);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.bat.domain.we.MiaoShaUser;
 import com.bat.result.CodeMsg;
 import com.bat.result.Result;
+import com.bat.util.UserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -34,6 +35,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 		if(request.getSession().getAttribute("user") != null){
 			return true;
 		}
+		System.out.println(UserUtil.getUser().getId());
 		Cookie[] cookies = request.getCookies();
 		MiaoShaUser miaoShaUser = null;
 //		for(Cookie c:cookies){
