@@ -1,5 +1,6 @@
 package com.bat.controller;
 
+import com.bat.annotation.AccessCtrl;
 import com.bat.domain.cas.WebUserLogin;
 import com.bat.domain.we.MiaoShaUser;
 import com.bat.queue.QueueUtil;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.stream.Stream;
 
 /**
  * @program: WeCloud
@@ -67,10 +70,21 @@ public class LoginController {
 		return "登录成功";
 	}
 
+	@AccessCtrl
 	@RequestMapping("/testQ")
 	@ResponseBody
 	public String testQ(HttpServletRequest request, HttpServletResponse response,LoginVo loginVo)throws Exception{
 //		ArrayBlockingQueue arrayBlockingQueue =  QueueUtil.abQueue;
+
+//		Cookie[] cookies = request.getCookies();
+//		Arrays.stream(cookies).forEach(s->{
+//			System.out.println(s.getName());
+//		});
+//		Stream.of(cookies).forEach(s->{
+//			System.out.println(s.getName());
+//		});
+//		String a = Stream.of(cookies).filter(s->s.getName().equals("sessionCookie")).findFirst().get().getName();
+
 		abQueue.put(System.currentTimeMillis());
 		return "登录成功";
 	}
