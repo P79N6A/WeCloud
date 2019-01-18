@@ -2,6 +2,7 @@ package com.bat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @program: WeCloud
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @create: 2018-11-23 18:51
  **/
 @SpringBootApplication
+@EnableAspectJAutoProxy(proxyTargetClass=true,exposeProxy=true)
 public class ApplicationStart {
 	public static void main(String[] args) {
 		SpringApplication.run(ApplicationStart.class, args);
