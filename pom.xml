@@ -13,6 +13,9 @@
         <module>platform</module>
         <module>service</module>
         <module>work</module>
+        <module>kafka-clients</module>
+        <module>kafka-spring</module>
+        <module>sql-mapper</module>
     </modules>
 
     <properties>
