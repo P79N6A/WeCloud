@@ -14,7 +14,7 @@ import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.cluster.node.DiscoveryNode;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+//import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,8 +38,8 @@ public class ElasticSearchTest {
                 .put("cluster.name","node-trunk")
                 .put("client.transport.sniff",true)
                 .build();
-        client = TransportClient.builder().settings(esSetting).build()
-                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("10.155.20.186"),9300));
+//        client = TransportClient.builder().settings(esSetting).build()
+//                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("10.155.20.186"),9300));
 
         List<DiscoveryNode> dNodes = client.connectedNodes();
         System.out.println(JSONObject.toJSONString(dNodes));
@@ -54,11 +54,12 @@ public class ElasticSearchTest {
         json.put("user","kimchy");
         json.put("postDate",new Date().toString());
         json.put("message","trying out Elasticsearch");
-
-        IndexResponse response = client.prepareIndex("index_t","type_t","3")
-                .setSource(json)
-                .get();
-        System.out.println(JSONObject.toJSONString(response));
+        json.put("attr",JSONObject.parse("[{\"id\":1,\"state\":0,\"createTime\":null,\"klbs\":null,\"alias\":\"地区\",\"klbIds\":\"11,44,2381,2383,2742\",\"treeId\":null,\"category\":\"shiti\",\"updateTime\":null},{\"id\":2,\"state\":0,\"createTime\":null,\"klbs\":null,\"alias\":\"院校\",\"klbIds\":\"11,55,44,2381,2383,2742\",\"treeId\":null,\"category\":\"shiti\",\"updateTime\":null}]"));
+        System.out.println(JSONObject.toJSONString(json));
+//        IndexResponse response = client.prepareIndex("index_t","type_t","3")
+//                .setSource(json)
+//                .get();
+//        System.out.println(JSONObject.toJSONString(response));
     }
 
     /**
@@ -67,7 +68,7 @@ public class ElasticSearchTest {
     @Test
     public void getIndex(){
         GetResponse response = client.prepareGet().setIndex("index_t").setType("type_t").setId("1")
-                .setOperationThreaded(false)
+//                .setOperationThreaded(false)
                 .get();
         System.out.println(JSONObject.toJSONString(response));
     }
@@ -153,7 +154,10 @@ public class ElasticSearchTest {
     }
 
 
-
+    @Test
+    public void time(){
+        System.out.println(new Date().getTime());
+    }
 
 
     @After
