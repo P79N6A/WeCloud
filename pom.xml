@@ -16,6 +16,7 @@
         <module>kafka-clients</module>
         <module>kafka-spring</module>
         <module>sql-mapper</module>
+        <module>spring-tag</module>
     </modules>
 
     <properties>
