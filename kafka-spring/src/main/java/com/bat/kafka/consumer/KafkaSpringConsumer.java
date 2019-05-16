@@ -14,5 +14,7 @@ public class KafkaSpringConsumer {
     @KafkaListener(topics = "test-topic")
     public void onTopic(ConsumerRecord record){
         System.out.printf("topic:%s,offset:%s,value:%s\n",record.topic(),record.offset(),record.value());
+        Thread a = new Thread();
+        a.interrupt();
     }
 }
