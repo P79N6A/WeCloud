@@ -1,5 +1,8 @@
 package com.bat.elasticsearch;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @Author: caoke
  * @Date: 2019/5/23 20:07
@@ -26,5 +29,25 @@ public class SuffixTest {
         if("db_user_live_short_234".matches("db_user_live_\\d+")){
             System.out.println("match3");
         }
+
+
+    }
+
+    public void main2() {
+        B b = new B();
+        b.setB(1);
+        b.setA(2);
+
+    }
+    @Getter
+    @Setter
+    static class A {
+        private Integer a;
+    }
+
+    @Getter
+    @Setter
+    static class B extends A{
+        private Integer b;
     }
 }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="DB2Tables" targetRuntime="MyBatis3Simple">
+        <plugin type="com.bat.generate.MyPlus"/>
+
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+            <property name="replaceString" value="Criteria"/>
+        </plugin>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://10.155.10.133:4202/db_eeo_data"
+                        userId="jiagou_dev"
+                        password="jiagou_dev">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.bat.domain"
+                            targetProject="D:\workspace\WeCloud\mybatis-generator\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.bat.dao.mapper"
+                         targetProject="D:\workspace\WeCloud\mybatis-generator\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.bat.dao"
+                             targetProject="D:\workspace\WeCloud\mybatis-generator\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table domainObjectName="K12V1Class" tableName="pe_k12_v1_class">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+            <!-- 不生成WithBLOBs类 -->
+            <!--<columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        </table>
+
+        <table domainObjectName="K12V1LessonAttribute" tableName="pe_k12_v1_lesson_attribute">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+        </table>
+
+        <table domainObjectName="K12V1OrderClassBak" tableName="pe_k12_v1_order_class_bak">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+        </table>
+
+        <table domainObjectName="K12V1OrderClassUser" tableName="pe_k12_v1_order_class_user">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+        </table>
+
+        <table domainObjectName="K12V1Product" tableName="pe_k12_v1_product">
+        </table>
+
+        <table domainObjectName="K12V1RenewalPath" tableName="pe_k12_v1_renewal_path">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+        </table>
+
+        <table domainObjectName="K12V1UserBak" tableName="pe_k12_v1_user_bak">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+        </table>
+
+        <table domainObjectName="K12V1UserClassHis" tableName="pe_k12_v1_user_class_his">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+        </table>
+
+        <table domainObjectName="K12V1UserProduct" tableName="pe_k12_v1_user_product">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

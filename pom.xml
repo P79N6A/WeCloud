@@ -18,6 +18,9 @@
         <module>sql-mapper</module>
         <module>spring-tag</module>
         <module>Canal-Client</module>
+        <module>mybatis-plus</module>
+        <module>mybatis-generator</module>
+        <module>zk-client</module>
     </modules>
 
     <properties>
